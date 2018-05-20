@@ -1,6 +1,7 @@
 import { Node } from './Node';
 
 const util = require('util');
+const chalk = require("chalk");
 
 class DLL {
   private head;
@@ -13,12 +14,26 @@ class DLL {
     this.length = 0;
   }
 
+  /**
+   * @function [isEmpty]
+   * @description Check if linked list length is 0 or not
+   * @returns boolean
+   */
   isEmpty(): boolean {
     return this.length === 0 ? true : false;
   }
 
+  /**
+   * @function [getSize]
+   * @description Return the size of the list
+   * @returns number
+   */
   getSize(): number {
     return this.length;
+  }
+
+  log(message, color) {
+    console.log(color(message));
   }
 
   /**
@@ -44,11 +59,10 @@ class DLL {
    */
 
   prepend(value: number) {
-    const node = new Node(value, this.head);
+    const node = new Node(value, this.head, null);
     if (this.head !== null) {
       // Set the previous of the current head to the new node
       this.head.prev = node;
-
       // Set the head equal to the new node
       this.head = node;
     } else {
@@ -56,6 +70,10 @@ class DLL {
       this.tail = node;
     }
     this.length++;
+    this.log(
+      `\n[SUCCESS] Node with value [${value}] prepended successfully`,
+      chalk.green
+    );
   }
 
   /**
@@ -69,10 +87,72 @@ class DLL {
       this.tail.next = node;
     }
     this.tail = node;
+
     if (this.head === null) {
       this.head = node;
+    } else {
+      let current = this.head;
+      let prev;
+      while (current.next !== null) {
+        prev = current;
+        current = current.next;
+      }
+      node.prev = prev;
     }
+    this.log(
+      `\n[SUCCESS] Node with value [${value}] appended successfully`,
+      chalk.green
+    );
+
     this.length++;
+  }
+
+  /**
+   *  @function [removeFirst]
+   *  @description: Remove the current node and set to the nextNode                   in the list
+   *  @return boolean
+   **/
+  removeFirst() {
+    if (this.getSize() > 0) {
+      if (this.getSize() === 1) {
+        this.head = null;
+        this.tail = null;
+      } else {
+        let current = this.head;
+        let nextNode = current.next;
+        current.next.prev = null;
+        current = null;
+        this.head = nextNode;
+      }
+      this.length--;
+      this.log(`\n[SUCCESS] First Item Removed Successfully`, chalk.green);
+    }
+    return true;
+  }
+
+  /**
+   *  @function [removeFirst]
+   *  @description: Remove the last node in the list
+   **/
+  removeLast() {
+    if (this.getSize() > 0) {
+      let current = this.head;
+      let prev;
+      while (current.next !== null) {
+        prev = current;
+        current = current.next;
+      }
+      this.tail = this.tail.prev;
+
+      if (this.getSize() === 1) {
+        this.head = null;
+      } else {
+        prev.next = null;
+        current = null;
+      }
+      this.length--;
+      this.log(`\n[SUCCESS] Last Item Removed Successfully`, chalk.green);
+    }
   }
 
   /**
@@ -140,23 +220,30 @@ class DLL {
             prev.next = null;
             this.tail = prev;
             current = null;
-            this.length--;
-            return true;
+            break;
           }
           if (currentIndex === pos) {
             prev.next = current.next;
             current.next.prev = prev;
             current = null;
-            this.length--;
-            return true;
+            break;
           }
           prev = current;
           current = current.next;
           currentIndex++;
         }
+        this.length--;
+        this.log(
+          `\n[SUCCESS]: Node at Position ${pos} removed \n`,
+          chalk.green
+        );
+        return true;
       }
     }
-    console.error("\n[ERROR][CODE=REMOVAL]: No node at that position\n");
+    this.log(
+      `\n[ERROR][CODE=REMOVAL]: No node at position ${pos}\n`,
+      chalk.red
+    );
     return false;
   }
 
@@ -164,8 +251,9 @@ class DLL {
    *  @function [getAtPosition]
    *  @argument positionIndex
    *  @description: Get the value of a node at a specific index
+   *  @returns number
    **/
-  getAtPosition(pos: number): boolean {
+  getAtPosition(pos: number): number {
     let current = this.head;
     let currentIndex = 1;
 
@@ -174,39 +262,72 @@ class DLL {
         current = current.next;
       }
 
-      console.log(`Value at position: ${pos} is ${current.value}`);
+      this.log(
+        `\n[SUCCESS] Item at Position ${pos}: ${current.value}`,
+        chalk.green
+      );
       return current.value;
     }
-    console.error("\n[ERROR][CODE=GET]: No node at that position\n");
-    return false;
+    this.log(`\n[ERROR][CODE=GET]: No node at position ${pos}\n`, chalk.red);
   }
 
+  /**
+   *  @function [print]
+   *  @description: Prints the list in order
+   **/
   print() {
-    //console.log(util.inspect(this, false, null));
-    console.log("Printing Linked List");
+    this.log("\nDisplaying Current List Forwards", chalk.blue);
+    this.log("-----------------------------", chalk.blue);
+    if (this.isEmpty()) {
+      this.log("List is Empty", chalk.blue);
+    }
     let current = this.head;
 
     while (current !== null) {
       if (current.next === null) {
-        process.stdout.write(`[${current.value}]\n`);
+        process.stdout.write(`[${current.value}]\n\n`);
       } else {
         process.stdout.write(`[${current.value}] => `);
       }
       current = current.next;
     }
   }
+
+  /**
+   *  @function [printReverse]
+   *  @description: Prints the list in reverse order
+   **/
+  printReverse() {
+    this.log("\nDisplaying Current List Backwards", chalk.blue);
+    this.log("-----------------------------", chalk.blue);
+    if (this.isEmpty()) {
+      this.log("List is Empty", chalk.blue);
+    }
+    let current = this.tail;
+
+    while (current !== null) {
+      if (current.prev === null) {
+        process.stdout.write(`[${current.value}]\n\n`);
+      } else {
+        process.stdout.write(`[${current.value}] => `);
+      }
+      current = current.prev;
+    }
+  }
 }
 
 const linkedlist = new DLL();
-
-linkedlist.prepend(5);
 linkedlist.prepend(10);
+linkedlist.prepend(5);
 linkedlist.append(20);
 linkedlist.append(30);
 linkedlist.append(40);
+linkedlist.getAtPosition(2);
 linkedlist.print();
+linkedlist.printReverse();
 // linkedlist.remove(10);
 // linkedlist.remove(40);
-// linkedlist.removeAtPosition(2);
-linkedlist.getAtPosition(5);
+linkedlist.removeAtPosition(4);
+
 linkedlist.print();
+linkedlist.printReverse();

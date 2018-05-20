@@ -4,7 +4,7 @@ var Node = /** @class */ (function () {
     function Node(value, nextNode, prevNode) {
         this.value = value;
         this.next = nextNode || null;
-        this.prev = prevNode;
+        this.prev = prevNode || null;
     }
     return Node;
 }());

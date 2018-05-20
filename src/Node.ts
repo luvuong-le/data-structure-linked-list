@@ -6,6 +6,6 @@ export class Node {
     constructor(value: number, nextNode?: object, prevNode?: object) {
         this.value = value;
         this.next = nextNode || null;
-        this.prev = prevNode;
+        this.prev = prevNode || null;
     }
 }

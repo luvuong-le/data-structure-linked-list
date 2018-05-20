@@ -1,5 +1,8 @@
 import { Node } from './Node';
 
+const util = require("util");
+const chalk = require('chalk');
+
 class SLL {
   private head;
   private length: number;
@@ -9,12 +12,26 @@ class SLL {
     this.length = 0;
   }
 
+  /**
+   * @function [isEmpty]
+   * @description Check if linked list length is 0 or not
+   * @returns boolean
+   */
   isEmpty(): boolean {
     return this.length === 0 ? true : false;
   }
 
+  /**
+   * @function [getSize]
+   * @description Return the size of the list
+   * @returns number
+   */
   getSize(): number {
     return this.length;
+  }
+
+  log(message, color) {
+    console.log(color(message));
   }
 
   /**
@@ -39,32 +56,75 @@ class SLL {
    * @argument number
    * @description: Append a new node to beginning of list
    */
-
   prepend(value: number) {
     const node = new Node(value, this.head);
     this.head = node;
     this.length++;
+    this.log(
+      `\n[SUCCESS] Node with value [${value}] prepended successfully`,
+      chalk.green
+    );
   }
 
   /**
-   *  @function createNode
+   *  @function [createNode]
    *  @description: Create node and append to end of list
    **/
   append(value: number) {
-    // Create a new node
     const node = new Node(value);
 
     if (this.head === null) {
       this.head = node;
     } else {
       let currentNode = this.head;
-
       while (currentNode.next !== null) {
         currentNode = currentNode.next;
       }
       currentNode.next = node;
     }
     this.length++;
+    this.log(
+      `\n[SUCCESS] Node with value [${value}] appended successfully`,
+      chalk.green
+    );
+  }
+
+  /**
+   *  @function [removeFirst]
+   *  @description: Remove the current node and set to the nextNode                   in the list
+   **/
+  removeFirst() {
+    if (this.getSize() > 0) {
+      let current = this.head;
+      let nextNode = current.next;
+      current = null;
+      this.head = nextNode;
+      this.length--;
+      this.log(`\n[SUCCESS] First Item Removed Successfully`, chalk.green);
+    }
+  }
+
+  /**
+   *  @function [removeFirst]
+   *  @description: Remove the last node in the list
+   **/
+  removeLast() {
+    if (this.getSize() > 0) {
+      let current = this.head;
+      let prev;
+      while (current.next !== null) {
+        prev = current;
+        current = current.next;
+      }
+      if (this.getSize() === 1) {
+        this.head = null;
+      } else {
+        prev.next = null;
+        current = null;
+      }
+      this.length--;
+      this.log(`\n[SUCCESS] Last Item Removed Successfully`, chalk.green);
+    }
   }
 
   /**
@@ -86,6 +146,7 @@ class SLL {
         prevNode = current;
         current = current.next;
       }
+      this.log(`\n[SUCCESS] [${value}] Removed Successfully`, chalk.green);
       return true;
     }
     return false;
@@ -109,18 +170,21 @@ class SLL {
         prev.next = current.next;
         current.next = null;
         this.length--;
-
+        this.log(`\n[SUCCESS]: Node at pos ${pos} removed\n`, chalk.green);
         return true;
       }
-
-      // Remove the current head and set the new head to be the next value of the deleted head
+      // Set the 'previous' variable equal to next of the current head
+      // Remove the current head and reset the head to the node stored in the 'previous'
       prev = current.next;
       current = null;
       this.head = prev;
       this.length--;
       return true;
     }
-    console.error("\n[ERROR][CODE=REMOVAL]: No node at that position\n");
+    this.log(
+      `\n[ERROR][CODE=REMOVAL]: No node at position ${pos}\n`,
+      chalk.red
+    );
     return false;
   }
 
@@ -129,7 +193,7 @@ class SLL {
    *  @argument positionIndex
    *  @description: Get the value of a node at a specific index
    **/
-  getAtPosition(pos: number): boolean {
+  getAtPosition(pos: number): number {
     if (pos <= this.getSize()) {
       let current = this.head;
       let currentIndex = 1;
@@ -137,19 +201,28 @@ class SLL {
       while (currentIndex++ !== pos) {
         current = current.next;
       }
-      console.log(`Position at: ${pos} is ${current.value}`);
-      return true;
+      this.log(
+        `\n[SUCCESS] Item at Position ${pos}: ${current.value}`,
+        chalk.green
+      );
+      return current.value;
     }
-    return false;
   }
 
+  /**
+   *  @function [print]
+   *  @description: Prints the list in order
+   **/
   print() {
-    console.log("Printing Linked List");
+    console.log("\nDisplaying Current List");
+    console.log("-------------------------");
+    if (this.isEmpty()) {
+      this.log("List is Empty", chalk.blue);
+    }
     let current = this.head;
-
     while (current !== null) {
       if (current.next === null) {
-        process.stdout.write(`[${current.value}]\n`);
+        process.stdout.write(`[${current.value}]\n\n`);
       } else {
         process.stdout.write(`[${current.value}] => `);
       }
@@ -166,6 +239,9 @@ linkedlist.append(3);
 linkedlist.prepend(5);
 linkedlist.remove(1);
 linkedlist.print();
-linkedlist.removeAtPosition(1);
-linkedlist.removeAtPosition(2);
+// linkedlist.removeAtPosition(11);
+// linkedlist.removeAtPosition(2);
+linkedlist.removeLast();
+linkedlist.removeLast();
+linkedlist.removeLast();
 linkedlist.print();
