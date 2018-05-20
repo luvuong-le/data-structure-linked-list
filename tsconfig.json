@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "allowJs": true,
+        "target": "es3",
+        "lib": [
+            "es6"
+        ]
+    },
+    "include": [
+        "./src/*"
+    ]
+}

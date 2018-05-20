@@ -1,0 +1,14 @@
+{
+  "name": "linked-list-typescript",
+  "version": "1.0.0",
+  "description": "Linked List Typescript",
+  "main": "linkedlist.js",
+  "scripts": {
+    "dev": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^10.1.2"
+  }
+}
