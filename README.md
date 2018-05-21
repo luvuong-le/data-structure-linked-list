@@ -11,3 +11,13 @@
 ### Build Process Used ###
 
 > Typescript: Dev files in 'src' which was then compiled down to es3 which is located in the dist folder.
+
+### Installation ###
+
+```javascript
+    // Install the required packages
+    npm install
+
+    // Use node to run the app located in the 'dist' folder
+    node dist/app.js
+```
