@@ -12,6 +12,8 @@
     "@types/node": "^10.1.2"
   },
   "dependencies": {
-    "chalk": "^2.4.1"
+    "ascii-art": "^1.4.3",
+    "chalk": "^2.4.1",
+    "inquirer": "^5.2.0"
   }
 }
