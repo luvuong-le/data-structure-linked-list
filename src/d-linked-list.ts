@@ -353,9 +353,3 @@ export class DLL {
     }
   }
 }
-
-// const linkedlist = new DLL();
-// linkedlist.append(3);
-// linkedlist.append(4);
-// linkedlist.reverse();
-// linkedlist.print();
