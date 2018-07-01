@@ -61,12 +61,9 @@ function showMain() {
     });
 }
 function showSLLMenu() {
-    // art.font('Singly', 'Doom', 'red+bold', (rendered) => {
-    //   console.log(rendered);
-    // });
     console.log(chalk.red("\nData Structures: Singly Linked Lists"));
     console.log("------------------------");
-    console.log("1: Get List Size \n2: Prepend \n3: Append \n4: Remove First \n5: Remove Last \n6: Remove By Number \n7: Remove at Position \n8: Get At Specific Position \n9: Print List \n10: Back to Main Menu");
+    console.log("1: Get List Size \n2: Prepend \n3: Append \n4: Remove First \n5: Remove Last \n6: Remove By Number \n7: Remove at Position \n8: Get At Specific Position \n9: Print List \n10: Reverse List \n11: Back to Main Menu");
     readlineInterface.question(chalk.blue('\nPick an option > '), function (answer) {
         switch (answer.trim()) {
             case "1":
@@ -135,6 +132,12 @@ function showSLLMenu() {
                 break;
             case "10":
                 action(1000, function () {
+                    sll.reverse();
+                    showSLLMenu();
+                });
+                break;
+            case "11":
+                action(1000, function () {
                     start();
                 });
                 break;
@@ -147,12 +150,9 @@ function showSLLMenu() {
     });
 }
 function showDLLMenu() {
-    // art.font('Doubly', 'Doom', 'red+bold', (rendered) => {
-    //   console.log(rendered);
-    // });
     console.log(chalk.red("\nData Structures: Doubly Linked Lists"));
     console.log("------------------------");
-    console.log("1: Get List Size \n2: Prepend \n3: Append \n4: Remove First \n5: Remove Last \n6: Remove By Number \n7: Remove at Position \n8: Get At Specific Position \n9: Print List Forwards \n10: Print List Backwards \n11: Back to Main Menu");
+    console.log("1: Get List Size \n2: Prepend \n3: Append \n4: Remove First \n5: Remove Last \n6: Remove By Number \n7: Remove at Position \n8: Get At Specific Position \n9: Print List Forwards \n10: Print List Backwards \n11: Reverse List \n12: Back to Main Menu");
     readlineInterface.question(chalk.blue('\nPick an option > '), function (answer) {
         switch (answer.trim()) {
             case "1":
@@ -226,6 +226,12 @@ function showDLLMenu() {
                 });
                 break;
             case "11":
+                action(1000, function () {
+                    dll.reverse();
+                    showDLLMenu();
+                });
+                break;
+            case "12":
                 action(1000, function () {
                     start();
                 });

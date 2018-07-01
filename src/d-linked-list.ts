@@ -1,4 +1,5 @@
 import { Node } from "./Node";
+import { link } from "fs";
 
 const util = require('util');
 const chalk = require("chalk");
@@ -278,6 +279,36 @@ export class DLL {
     this.log(`\n[ERROR][CODE=GET]: No node at position ${pos}\n`, chalk.red);
   }
 
+  reverse() {
+    if (this.isEmpty()) {
+      this.log('\nList is Empty!', chalk.red);
+      this.log('-------------------------', chalk.red);
+    } else {
+      // Change the head = tail and tail = head
+      let currentHead = this.head;
+      this.head = this.tail;
+      this.tail = currentHead;
+
+      // Create a variable to keep track of head node
+      let current = this.head;
+
+      // Loop and swap each nodes prev and next
+      while (current !== null) {
+        let prev = current.prev;
+
+        current.prev = current.next;
+        current.next = prev;
+
+        current = current.next;
+      }
+
+      this.log('\nSuccessfully Reversed List', chalk.green);
+      this.log('-------------------------', chalk.green);
+    }
+
+    return this;
+  }
+
   /**
    *  @function [print]
    *  @description: Prints the list in order
@@ -326,14 +357,5 @@ export class DLL {
 // const linkedlist = new DLL();
 // linkedlist.append(3);
 // linkedlist.append(4);
-// // linkedlist.append(4);
-// linkedlist.remove(3);
-// linkedlist.remove(4);
+// linkedlist.reverse();
 // linkedlist.print();
-// linkedlist.printReverse();
-// // linkedlist.remove(10);
-// // linkedlist.remove(40);
-// linkedlist.removeAtPosition(4);
-
-// linkedlist.print();
-// linkedlist.printReverse();

@@ -182,6 +182,28 @@ var SLL = /** @class */ (function () {
             return current.value;
         }
     };
+    SLL.prototype.reverse = function () {
+        if (this.isEmpty()) {
+            this.log('\nList is Empty!', chalk.red);
+            this.log('-------------------------', chalk.red);
+        }
+        else {
+            var current = this.head;
+            var prev = null;
+            var next = null;
+            // Loop through list 
+            while (current !== null) {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            this.head = prev;
+            this.log('\nSuccessfully Reversed List', chalk.green);
+            this.log('-------------------------', chalk.green);
+        }
+        return this;
+    };
     /**
      *  @function [print]
      *  @description: Prints the list in order
@@ -206,17 +228,3 @@ var SLL = /** @class */ (function () {
     return SLL;
 }());
 exports.SLL = SLL;
-// const linkedlist = new SLL();
-// linkedlist.getSize();
-// linkedlist.append(1);
-// linkedlist.append(2);
-// linkedlist.append(3);
-// linkedlist.prepend(5);
-// linkedlist.remove(1);
-// linkedlist.print();
-// // linkedlist.removeAtPosition(11);
-// // linkedlist.removeAtPosition(2);
-// linkedlist.removeLast();
-// linkedlist.removeLast();
-// linkedlist.removeLast();
-// linkedlist.print();
