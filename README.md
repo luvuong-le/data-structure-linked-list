@@ -18,6 +18,9 @@
     // Install the required packages
     npm install
 
-    // Use node to run the app located in the 'dist' folder
-    node dist/app.js
+    // Build the project
+    npm run build
+
+    // Start the app.js file using npm start
+    npm start
 ```
