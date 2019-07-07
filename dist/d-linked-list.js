@@ -2,7 +2,7 @@
 exports.__esModule = true;
 var Node_1 = require("./Node");
 var util = require('util');
-var chalk = require("chalk");
+var chalk = require('chalk');
 var DLL = /** @class */ (function () {
     function DLL() {
         this.head = null;
@@ -83,7 +83,7 @@ var DLL = /** @class */ (function () {
                 prev = current;
                 current = current.next;
             }
-            node.prev = prev;
+            node.setPrevious(prev);
         }
         this.log("\n[SUCCESS] Node with value [" + value + "] appended successfully", chalk.green);
         this.length++;
@@ -274,10 +274,10 @@ var DLL = /** @class */ (function () {
      *  @description: Prints the list in order
      **/
     DLL.prototype.print = function () {
-        this.log("\nDisplaying Current List Forwards", chalk.blue);
-        this.log("-----------------------------", chalk.blue);
+        this.log('\nDisplaying Current List Forwards', chalk.blue);
+        this.log('-----------------------------', chalk.blue);
         if (this.isEmpty()) {
-            this.log("List is Empty", chalk.blue);
+            this.log('List is Empty', chalk.blue);
         }
         var current = this.head;
         while (current !== null) {
@@ -295,10 +295,10 @@ var DLL = /** @class */ (function () {
      *  @description: Prints the list in reverse order
      **/
     DLL.prototype.printReverse = function () {
-        this.log("\nDisplaying Current List Backwards", chalk.blue);
-        this.log("-----------------------------", chalk.blue);
+        this.log('\nDisplaying Current List Backwards', chalk.blue);
+        this.log('-----------------------------', chalk.blue);
         if (this.isEmpty()) {
-            this.log("List is Empty", chalk.blue);
+            this.log('List is Empty', chalk.blue);
         }
         var current = this.tail;
         while (current !== null) {
@@ -314,8 +314,3 @@ var DLL = /** @class */ (function () {
     return DLL;
 }());
 exports.DLL = DLL;
-// const linkedlist = new DLL();
-// linkedlist.append(3);
-// linkedlist.append(4);
-// linkedlist.reverse();
-// linkedlist.print();

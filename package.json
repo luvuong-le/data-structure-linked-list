@@ -1,20 +1,22 @@
 {
-  "name": "linked-list-typescript",
-  "version": "1.0.0",
-  "description": "Linked List Typescript",
-  "main": "linkedlist.js",
-  "scripts": {
-    "dev": "tsc -w"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^10.1.2"
-  },
-  "dependencies": {
-    "ascii-art": "^1.4.3",
-    "chalk": "^2.4.1",
-    "hoek": "^5.0.3",
-    "inquirer": "^5.2.0"
-  }
+    "name": "linked-list-typescript",
+    "version": "1.0.0",
+    "description": "Linked List Typescript",
+    "main": "linkedlist.js",
+    "scripts": {
+        "start": "node dist/app.js",
+        "build": "tsc",
+        "dev": "tsc -w"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^10.1.2",
+        "mem": "^5.1.1"
+    },
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "hoek": "^5.0.3",
+        "inquirer": "^5.2.0"
+    }
 }
