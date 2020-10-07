@@ -1,10 +1,8 @@
-import { Node } from './Node';
-import { link } from 'fs';
+import IDoublyLinkedList from '@interfaces/IDoublyLinkedList';
+import Node from '@modules/Node';
+import chalk from "chalk";
 
-const util = require('util');
-const chalk = require('chalk');
-
-export class DLL {
+export default class DoublyLinkedList implements IDoublyLinkedList {
     private head;
     private tail;
     private length: number;

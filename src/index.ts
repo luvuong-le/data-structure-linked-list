@@ -1,13 +1,9 @@
-import { SLL } from './s-linked-list';
-import { DLL } from './d-linked-list';
-
-const chalk = require('chalk');
-const { prompt } = require('inquirer');
+import "module-alias/register";
+import SinglyLinkedList from '@modules/SinglyLinkedList';
+import DoublyLinkedList from '@modules/DoublyLinkedList';
+import chalk from "chalk";
 const readline = require('readline');
 
-/* Set up readline module interface 
-   Creates a new readline.Interface instance
-*/
 const readlineInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -17,8 +13,8 @@ readlineInterface.on('close', () => {
     console.log('Exiting Program...');
 });
 
-const sll = new SLL();
-const dll = new DLL();
+const sll = new SinglyLinkedList();
+const dll = new DoublyLinkedList();
 
 function start() {
     init();
@@ -43,7 +39,6 @@ function showMain() {
     );
 
     readlineInterface.question(chalk.blue('\nPick an option > '), answer => {
-        // Switch Statement Here
         switch (answer.trim()) {
             case '1':
                 action(1000, () => {
@@ -293,5 +288,4 @@ function init() {
     showMain();
 }
 
-// Start the app by showing the title
 start();

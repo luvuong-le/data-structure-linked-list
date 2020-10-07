@@ -1,22 +1,36 @@
 {
     "name": "linked-list-typescript",
     "version": "1.0.0",
-    "description": "Linked List Typescript",
-    "main": "linkedlist.js",
+    "description": "Linked List using Typescript",
+    "main": "index.js",
     "scripts": {
-        "start": "node dist/app.js",
+        "start": "tsc && node dist/index.js",
         "build": "tsc",
         "dev": "tsc -w"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/node": "^10.1.2",
-        "mem": "^5.1.1"
+        "@types/jest": "^26.0.14",
+        "@types/node": "^10.17.37",
+        "@typescript-eslint/eslint-plugin": "^4.4.0",
+        "@typescript-eslint/parser": "^4.4.0",
+        "eslint": "^7.10.0",
+        "eslint-config-prettier": "^6.12.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "jest": "^26.5.2",
+        "mem": "^5.1.1",
+        "module-alias": "^2.2.2",
+        "ts-jest": "^26.4.1",
+        "typescript": "^4.0.3"
     },
     "dependencies": {
         "chalk": "^2.4.1",
         "hoek": "^5.0.3",
         "inquirer": "^5.2.0"
+    },
+    "_moduleAliases": {
+        "@interfaces": "dist/interfaces",
+        "@modules": "dist/modules"
     }
 }

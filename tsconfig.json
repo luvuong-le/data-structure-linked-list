@@ -5,7 +5,16 @@
         "target": "es3",
         "lib": [
             "es6"
-        ]
+        ],
+        "baseUrl": "./src",
+        "paths": {
+            "@interfaces/*": [
+                "interfaces/*"
+            ],
+            "@modules/*": [
+                "modules/*"
+            ],
+        }
     },
     "include": [
         "./src/",

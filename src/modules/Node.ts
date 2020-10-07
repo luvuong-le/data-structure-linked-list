@@ -1,7 +1,9 @@
-export class Node {
-    private value: number;
-    private next: Node;
-    private prev: Node;
+import INode from "@interfaces/INode";
+
+export default class Node implements INode {
+    value: number;
+    next: Node;
+    prev: Node;
 
     constructor(value: number, nextNode?: Node, prevNode?: Node) {
         this.value = value;
