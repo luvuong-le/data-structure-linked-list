@@ -6,10 +6,12 @@
     "scripts": {
         "start": "tsc && node dist/index.js",
         "build": "tsc",
-        "dev": "tsc -w"
+        "dev": "tsc -w",
+        "lint": "eslint src/*.{js,ts,tsx} --quiet --fix",
+        "test": "jest --silent"
     },
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/jest": "^26.0.14",
         "@types/node": "^10.17.37",

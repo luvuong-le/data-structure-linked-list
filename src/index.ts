@@ -1,8 +1,10 @@
 import "module-alias/register";
+
 import SinglyLinkedList from '@modules/SinglyLinkedList';
 import DoublyLinkedList from '@modules/DoublyLinkedList';
+
+import * as readline from 'readline';
 import chalk from "chalk";
-const readline = require('readline');
 
 const readlineInterface = readline.createInterface({
     input: process.stdin,
